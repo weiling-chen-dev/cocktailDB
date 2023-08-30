@@ -9,7 +9,7 @@ Welcome to my React practice project! This is a simple App made in React framewo
 - [React Router](https://reactrouter.com/en/main): using latest React Router syntax (v6)
 - [Styled Components](https://styled-components.com/): using css in Js to style each components separately from the global css, avoiding name collisions
 - [TheCocktailDB](https://www.thecocktaildb.com/): free JSON API to grab the info from the cocktail database
-- [React Query](https://tanstack.com/)
+- [TanStack Query](https://tanstack.com/): cache the searching result for better UX
 
 ## My Big Gotcha
 
@@ -20,6 +20,18 @@ Welcome to my React practice project! This is a simple App made in React framewo
 - Web api
   - FormData (return array of arrays)
   - URL constructor
+- TanStack Query (React Query)
+  - grab react query in the loader: avoid refetching within stale time
+  ```js
+  //pass queryClient instance as parameter and return a actual loader function in a function
+  const loader =
+    (queryClient) =>
+    async ({ params }) => {
+      const { id } = params;
+      await queryClient.ensureQueryData(singleCocktailQuery(id));
+      return { id };
+    };
+  ```
 
 ## Reference
 
